@@ -40,5 +40,81 @@
     </div>
 
 
+    <script>
+      const apiKey = "312abfd953c970ceaf81f671079f6e22";
+      const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+      const searchBox = document.querySelector(".search input");
+      const searchBtn = document.querySelector(".search button");
+      const weatherIcon = document.querySelector(".weather-icon");
+
+    async function checkWeather(city) {
+        const respone = await fetch(apiUrl + city + '&APPID=${apiKey}');
+        var data = await respone.json();
+
+        console.log(data);
+
+        document.querySelector(".city").innerHTML = data.name;
+        document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°c";
+        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+        document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+
+        async function checkWeather(city){
+        const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+        
+        if(response.status == 404){
+          document.querySelector(".error").style.display = "block";
+          document.querySelector(".weather").style.display = "none";
+        }else{
+         
+          var data = await response.json(); 
+
+          
+          document.querySelector(".city").innerHTML = data.name;
+          document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+          document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+          document.querySelector(".wind").innerHTML = data.wind.speed + "km/h";
+        
+          if(data.weather[0].main == "Clouds")
+          {
+            weatherIcon.src = src = "C:\Users\William\Documents\Java Script Programs\Weather App\weather-app-img\clouds.png";
+          }
+          else if(data.weather[0].main == "Clear"){
+            weatherIcon.src = src = "C:\Users\William\Documents\Java Script Programs\Weather App\weather-app-img\clear.png";
+          }
+          else if(data.weather[0].main == "Rain"){
+            weatherIcon.src = src = "C:\Users\William\Documents\Java Script Programs\Weather App\weather-app-img\rain.png";
+          }
+          else if(data.weather[0].main == "Drizzle"){
+            weatherIcon.src = src = "C:\Users\William\Documents\Java Script Programs\Weather App\weather-app-img\drizzle.png";
+          }
+          else if(data.weather[0].main == "Mist"){
+            weatherIcon.src = src = "C:\Users\William\Documents\Java Script Programs\Weather App\weather-app-img\mist.png";
+          }
+          else if(data.weather[0].main == "Snow"){
+            weatherIcon.src = src = "C:\Users\William\Documents\Java Script Programs\Weather App\weather-app-img\snow.png";
+          }
+          else{
+            weatherIcon.src = src = "C:\Users\William\Documents\Java Script Programs\Weather App\weather-app-img\wind.png";
+          }
+
+          document.querySelector(".weather").style.display = "block"; 
+          document.querySelector(".error").style.display = "none"; 
+        }
+      } 
+
+
+
+    }
+    
+
+    searchBtn.addEventListener("click", ()=>{
+        checkWeather(searchBox.value);
+    })
+
+    checkWeather();
+
+    </script>
+
+
     </body>
     </html>
