@@ -1,0 +1,7 @@
+https://openweathermap.org/current
+
+https://api.openweathermap.org/data/2.5/weather?id={city id}&appid={API key}
+
+7e87948002156bfcf9993502016e2660
+
+https://api.openweathermap.org/data/2.5/weather?id=clemson&appid=7e87948002156bfcf9993502016e2660
